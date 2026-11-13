@@ -1,1 +1,74 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>المشرفون | Koshkool</title><link rel="stylesheet" href="../css/admin.css"></head><body class="app-page"><aside class="sidebar"><a class="brand" href="../dashboard.html"><span class="brand-mark small">K</span><span><b>Koshkool</b><small>ADMIN PANEL</small></span></a><nav><a class="nav-link  " href="../dashboard.html">▦ <span>نظرة عامة</span></a><a class="nav-link  " href="students.html">♙ <span>الطلاب</span></a><a class="nav-link  " href="lessons.html">▤ <span>الدروس</span></a><a class="nav-link  " href="exams.html">✎ <span>الامتحانات</span></a><a class="nav-link  " href="results.html">▥ <span>النتائج</span></a><a class="nav-link  " href="announcements.html">◈ <span>الإعلانات</span></a><a class="nav-link active owner-only" href="admins.html">♧ <span>المشرفون</span></a></nav></aside><main class="main-content page-placeholder"><header class="topbar"><div><p class="eyebrow">MANAGEMENT</p><h1>المشرفون</h1></div></header><section class="panel"><h3>قسم المشرفون</h3><p class="muted">الواجهة الأساسية جاهزة، وربط العمليات بقاعدة البيانات يحتاج إعداد الجداول وسياسات الصلاحيات الخاصة بهذا القسم.</p><div class="notice">هذه الصفحة حالياً هي هيكل واجهة وليست نظام إدارة مكتمل. لا تنفّذ عمليات حقيقية قبل إعداد Supabase وRLS واختبار الصلاحيات.</div></section></main></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>إدارة المشرفين | Koshkool</title>
+  <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body class="app-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../dashboard.html"><span class="brand-mark small">K</span><span><b>Koshkool</b><small>ADMIN PANEL</small></span></a>
+    <nav>
+      <a class="nav-link" href="../dashboard.html">▦ <span>نظرة عامة</span></a>
+      <a class="nav-link" href="students.html">♙ <span>الطلاب</span></a>
+      <a class="nav-link" href="lessons.html">▤ <span>الدروس</span></a>
+      <a class="nav-link" href="exams.html">✎ <span>الامتحانات</span></a>
+      <a class="nav-link" href="results.html">▥ <span>النتائج</span></a>
+      <a class="nav-link" href="announcements.html">◈ <span>الإعلانات</span></a>
+      <a class="nav-link active owner-only" href="admins.html">♧ <span>المشرفون</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="profile-mini"><div class="avatar">O</div><div><b id="adminName">المالك</b><small>SUPER ADMIN</small></div></div>
+      <button id="logoutBtn" class="btn ghost full">تسجيل الخروج ↗</button>
+    </div>
+  </aside>
+
+  <main class="main-content admins-page">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn" aria-label="القائمة">☰</button>
+      <div><p class="eyebrow">MANAGEMENT / ADMINS</p><h1>إدارة المشرفين</h1></div>
+      <div class="top-actions"><span class="status-dot"></span><span class="muted">إدارة المالك</span></div>
+    </header>
+
+    <section class="welcome admins-welcome">
+      <div><span class="tag">صلاحيات الإدارة</span><h2>إدارة فريق كشكول</h2><p class="muted">أضف مشرفين جدد وتابع حالة حساباتهم من مكان واحد.</p></div>
+      <div class="welcome-art">A.</div>
+    </section>
+
+    <section class="admin-stats">
+      <article class="stat-card"><span class="stat-icon">♧</span><p>إجمالي المشرفين</p><strong id="totalAdmins">—</strong></article>
+      <article class="stat-card"><span class="stat-icon">✓</span><p>حسابات نشطة</p><strong id="activeAdmins">—</strong></article>
+      <article class="stat-card"><span class="stat-icon">Ⅱ</span><p>حسابات موقوفة</p><strong id="inactiveAdmins">—</strong></article>
+    </section>
+
+    <section class="panel admin-create-panel">
+      <div class="panel-head"><div><h3>إضافة مشرف جديد</h3><p class="muted">سيتم إنشاء حساب دخول بصلاحية مشرف عادي، وليس مالكاً.</p></div></div>
+      <form id="createAdminForm" class="admin-form">
+        <label>اسم المستخدم<input id="newUsername" autocomplete="off" required minlength="3" maxlength="24" placeholder="مثال: ahmed_admin"></label>
+        <label>الكود التعريفي<input id="newAdminCode" inputmode="numeric" autocomplete="off" required minlength="5" maxlength="20" placeholder="أرقام فقط"></label>
+        <label>البريد الإلكتروني<input id="newEmail" type="email" autocomplete="email" required placeholder="name@example.com"></label>
+        <label>كلمة المرور المؤقتة<input id="newPassword" type="password" autocomplete="new-password" required minlength="10" placeholder="10 أحرف على الأقل"></label>
+        <div class="admin-form-actions"><button class="btn primary" id="createAdminBtn" type="submit">＋ إنشاء حساب المشرف</button><span class="muted">احتفظ ببيانات الدخول وأرسلها للمشرف بشكل آمن.</span></div>
+      </form>
+      <p id="formMessage" class="admin-message" role="status"></p>
+    </section>
+
+    <section class="panel admins-list-panel">
+      <div class="panel-head admin-list-head"><div><h3>قائمة المشرفين</h3><p class="muted">الحسابات المسجلة في قاعدة البيانات</p></div><button id="refreshAdmins" class="btn ghost" type="button">↻ تحديث القائمة</button></div>
+      <div id="listMessage" class="admin-message" role="status"></div>
+      <div class="table-wrap">
+        <table class="data-table admins-table">
+          <thead><tr><th>المشرف</th><th>الكود التعريفي</th><th>الصلاحية</th><th>الحالة</th><th>تاريخ الإضافة</th><th>إجراء</th></tr></thead>
+          <tbody id="adminsTableBody"><tr><td colspan="6">جارٍ تحميل البيانات...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <p class="admin-security-note">الحماية: جميع عمليات الإضافة والتعديل يتم التحقق منها داخل الخادم، ولا تعتمد على إخفاء عناصر الواجهة فقط.</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/admins.js"></script>
+</body>
+</html>
