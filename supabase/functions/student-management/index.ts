@@ -41,13 +41,15 @@ Deno.serve(async (req) => {
     const action = body?.action;
 
     if (action === "list") {
-      const [{data:profiles,error:profileError},{data:userData,error:userError}] = await Promise.all([
+      const [{data:profiles,error:profileError},{data:userData,error:userError},{data:adminRows,error:adminError}] = await Promise.all([
         adminClient.from("profiles").select("id,full_name,username,created_at,is_active").eq("role","student").order("created_at",{ascending:false}),
-        adminClient.auth.admin.listUsers({page:1,perPage:1000})
+        adminClient.auth.admin.listUsers({page:1,perPage:1000}),
+        adminClient.from("admin_roles").select("user_id")
       ]);
-      if (profileError || userError) return reply({error:"تعذر تحميل قائمة الطلاب"},500);
+      if (profileError || userError || adminError) return reply({error:"تعذر تحميل قائمة الطلاب"},500);
+      const adminIds = new Set((adminRows || []).map(row => row.user_id));
       const emails = new Map((userData.users || []).map(user => [user.id,user.email || ""]));
-      const students = (profiles || []).map(profile => ({...profile,email:emails.get(profile.id) || ""}));
+      const students = (profiles || []).filter(profile => !adminIds.has(profile.id)).map(profile => ({...profile,email:emails.get(profile.id) || ""}));
       return reply({students});
     }
 
@@ -82,6 +84,9 @@ Deno.serve(async (req) => {
     const {data:student,error:studentError} = await adminClient.from("profiles")
       .select("id,role,full_name").eq("id",userId).eq("role","student").maybeSingle();
     if (studentError || !student) return reply({error:"الطالب غير موجود"},404);
+    const {data:targetAdmin,error:targetAdminError} = await adminClient.from("admin_roles").select("user_id").eq("user_id",userId).maybeSingle();
+    if (targetAdminError) return reply({error:"تعذر التحقق من نوع الحساب"},500);
+    if (targetAdmin) return reply({error:"لا يمكن تنفيذ إدارة الطلاب على حساب مشرف"},403);
 
     if (action === "update") {
       const fullName = typeof body.full_name === "string" ? body.full_name.trim() : "";
