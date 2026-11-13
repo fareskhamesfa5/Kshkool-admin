@@ -7,8 +7,17 @@ async function initDashboard() {
   document.getElementById("adminName").textContent = role.username || "المشرف";
   document.getElementById("adminRole").textContent = role.role === "owner" ? "SUPER ADMIN" : "ADMIN";
   document.querySelectorAll(".owner-only").forEach(el => { if (role.role !== "owner") el.hidden = true; });
-  const { count } = await supabaseClient.from("profiles").select("*", { count: "exact", head: true }).eq("role", "student");
-  document.getElementById("studentsCount").textContent = count ?? "—";
+  const [{ data: studentProfiles, error: studentsError }, { data: adminAccounts, error: adminsError }] = await Promise.all([
+    supabaseClient.from("profiles").select("id").eq("role", "student"),
+    supabaseClient.from("admin_roles").select("user_id")
+  ]);
+  if (studentsError || adminsError) {
+    document.getElementById("studentsCount").textContent = "—";
+    return;
+  }
+  const adminIds = new Set((adminAccounts || []).map(account => account.user_id));
+  const actualStudentsCount = (studentProfiles || []).filter(profile => !adminIds.has(profile.id)).length;
+  document.getElementById("studentsCount").textContent = actualStudentsCount;
 }
 document.getElementById("logoutBtn")?.addEventListener("click", async () => { if (supabaseClient) await supabaseClient.auth.signOut(); location.href = "index.html"; });
 document.getElementById("menuBtn")?.addEventListener("click", () => document.getElementById("sidebar").classList.toggle("open"));
