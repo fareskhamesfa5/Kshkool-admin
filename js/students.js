@@ -155,8 +155,8 @@ async function initStudentsPage() {
   if (error || !session) { location.href = "../index.html"; return; }
   const {data:admin,error:roleError} = await supabaseClient.from("admin_roles")
     .select("username,role,is_active").eq("user_id",session.user.id).maybeSingle();
-  if (roleError || !admin || !admin.is_active || admin.role !== "owner") {
-    document.querySelector(".students-page").innerHTML = '<section class="panel"><h2>غير مصرح بالدخول</h2><p class="muted">هذه الصفحة متاحة لمدير النظام فقط.</p><a class="btn primary" href="../dashboard.html">العودة للوحة التحكم</a></section>';
+  if (roleError || !admin || !admin.is_active || !["owner","admin"].includes(admin.role)) {
+    document.querySelector(".students-page").innerHTML = '<section class="panel"><h2>غير مصرح بالدخول</h2><p class="muted">هذه الصفحة متاحة لفريق الإدارة فقط.</p><a class="btn primary" href="../dashboard.html">العودة للوحة التحكم</a></section>';
     return;
   }
   document.getElementById("adminName").textContent = admin.username || "المشرف";
