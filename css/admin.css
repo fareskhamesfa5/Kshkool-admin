@@ -395,3 +395,53 @@ body.app-page{
 @media(prefers-reduced-motion:reduce){
   .admins-page *{transition:none!important}
 }
+
+
+/* Functional light theme for the admin dashboard */
+.app-page{transition:background-color .2s ease,color .2s ease}
+.admin-theme-toggle{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;margin-right:12px;padding:0;border:1px solid #315b7e;border-radius:50%;background:#102b47;color:#fff;cursor:pointer;box-shadow:0 5px 15px #0002;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.admin-theme-toggle:hover{transform:translateY(-2px) rotate(8deg);border-color:#58baff;box-shadow:0 8px 20px #1689e833}
+.admin-theme-toggle:active{transform:scale(.92)}
+.admin-theme-icon{width:21px;height:21px;object-fit:contain}
+.admin-theme-icon.theme-pop{animation:adminThemePop .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes adminThemePop{0%{transform:rotate(-100deg) scale(.35);opacity:.2}70%{transform:rotate(15deg) scale(1.15);opacity:1}100%{transform:rotate(0) scale(1)}}
+body.light-theme.app-page{--bg:#f2f6fc;--panel:#fff;--panel2:#edf3fa;--text:#172b43;--muted:#63758b;--line:#d9e3ef;--purple:#1689e8;--green:#159b78;background:radial-gradient(ellipse at 78% 0%,rgba(24,105,171,.08),transparent 34%),#f2f6fc;color:#172b43}
+body.light-theme .sidebar{background:#fff;border-left-color:#d9e3ef;box-shadow:-8px 0 28px rgba(30,60,90,.07)}
+body.light-theme .brand small,body.light-theme .nav-caption{color:#7b8da2}
+body.light-theme .nav-link{color:#52677f}
+body.light-theme .nav-link:hover,body.light-theme .nav-link.active{background:#e7f3ff;color:#126bb1;border-right-color:#1689e8}
+body.light-theme .profile-mini{border-top-color:#e0e8f1}
+body.light-theme .profile-mini b,body.light-theme .topbar h1,body.light-theme .panel h3,body.light-theme .stat-card strong{color:#172b43}
+body.light-theme .main-content{color:#172b43}
+body.light-theme .welcome{background:radial-gradient(circle at 12% 20%,rgba(65,172,255,.13),transparent 32%),linear-gradient(115deg,#e2f2ff,#f5faff 68%);border-color:#c8e1f5;box-shadow:0 12px 35px rgba(30,70,110,.08)}
+body.light-theme .welcome h2{color:#163957}
+body.light-theme .welcome-art{color:#1689e8;text-shadow:5px 5px 0 #d1e9fb}
+body.light-theme .tag{background:#e4f3ff;color:#176cae;border-color:#b8dcf5}
+body.light-theme .stat-card,body.light-theme .panel{background:#fff;border-color:#dce6f0;box-shadow:0 8px 24px rgba(30,60,90,.06)}
+body.light-theme .stat-card p,body.light-theme .stat-card small{color:#6e8095}
+body.light-theme .quick-grid a{background:#f5f9fd;border-color:#dce6f0;color:#176cae}
+body.light-theme .quick-grid a>b{color:#203b56}
+body.light-theme .quick-grid small{color:#70849a}
+body.light-theme .notice{background:#edf6ff;border-right-color:#1689e8;color:#345875}
+body.light-theme .btn.ghost,body.light-theme .icon-btn{background:#edf4fb;color:#31516e;border-color:#d4e1ee}
+body.light-theme .data-table th,body.light-theme .data-table td{border-bottom-color:#e1e9f1}
+body.light-theme .data-table th{color:#607991}
+body.light-theme .admin-form label{color:#314d68}
+body.light-theme .admin-form input{background:#fff;color:#172b43;border-color:#d3e0ec}
+body.light-theme .admin-form input::placeholder{color:#91a0b0}
+body.light-theme .admins-page .admin-create-panel,body.light-theme .admins-page .admins-list-panel{background:#fff;border-color:#dce6f0}
+body.light-theme .admins-page .admins-welcome{background:linear-gradient(120deg,#e4f3ff,#f7fbff);border-color:#c9e2f5}
+body.light-theme .admins-page .admins-welcome h2{color:#173b5a}
+body.light-theme .admins-page .admin-form label{color:#314d68}
+body.light-theme .admins-page .admin-form input{background:#f8fbff;color:#172b43;border-color:#d4e1ee}
+body.light-theme .admins-page .table-wrap{background:#fff;border-color:#e0e9f2}
+body.light-theme .admins-page .admins-table th{background:#edf5fc;color:#45647f}
+body.light-theme .admins-page .admins-table td{color:#314d68;border-bottom-color:#e5edf4}
+body.light-theme .admins-page .admins-table tbody tr:hover{background:#f4f9fe}
+body.light-theme .admins-page .admin-security-note{background:#f0f7fd;border-color:#dceaf5;color:#5d7891}
+body.light-theme .admin-message,body.light-theme .admin-security-note{color:#637b91}
+body.light-theme .role-pill,body.light-theme .state-pill{background:#e6f3ff;color:#236a9e}
+body.light-theme .role-pill.owner{background:#fff4d9;color:#89631a}
+body.light-theme .state-pill.active{background:#e2f7ef;color:#167454}
+body.light-theme .state-pill.inactive{background:#ffedf0;color:#a43f50}
+@media(prefers-reduced-motion:reduce){.admin-theme-toggle,.admin-theme-icon{transition:none}.admin-theme-icon.theme-pop{animation:none}}
