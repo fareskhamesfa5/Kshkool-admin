@@ -33,8 +33,8 @@ Deno.serve(async (req) => {
     const adminClient = createClient(url,serviceKey);
     const {data:actor,error:actorError} = await adminClient.from("admin_roles")
       .select("username,role,is_active").eq("user_id",authData.user.id).maybeSingle();
-    if (actorError || !actor || !actor.is_active || !["owner","admin"].includes(actor.role)) {
-      return reply({error:"ليس لديك صلاحية إدارة الطلاب"},403);
+    if (actorError || !actor || !actor.is_active || actor.role !== "owner") {
+      return reply({error:"إدارة حسابات الطلاب متاحة لمدير النظام فقط"},403);
     }
 
     const body = await req.json();
