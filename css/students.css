@@ -55,3 +55,23 @@
 .student-security-note{font-size:11px;line-height:1.8;color:#88a9c6;margin:14px 3px}
 @media(max-width:900px){.student-form{grid-template-columns:1fr 1fr}}
 @media(max-width:680px){.students-page{padding-top:18px}.students-welcome{padding:21px}.students-art{font-size:52px}.students-stats{grid-template-columns:1fr 1fr;gap:9px}.students-stats .stat-card:last-child{grid-column:1/-1}.student-create-panel,.student-list-panel{padding:16px}.student-form{grid-template-columns:1fr}.student-form-actions{align-items:stretch;flex-direction:column}.student-form-actions .btn{width:100%}.student-list-heading{align-items:flex-start}.student-toolbar{flex-direction:column}.student-toolbar select{width:100%}}
+
+
+/* Students page light theme */
+body.light-theme .students-welcome{background:radial-gradient(circle at 82% 28%,rgba(55,166,255,.12),transparent 28%),linear-gradient(120deg,#e3f3ff,#f6fbff 70%);border-color:#c9e2f5;box-shadow:0 12px 35px rgba(30,70,110,.08)}
+body.light-theme .students-welcome h2{color:#173b5a}
+body.light-theme .students-art{color:#1689e8;text-shadow:0 8px 22px #1689e822}
+body.light-theme .students-page .stat-card{background:#fff;border-color:#dce6f0;box-shadow:0 8px 24px rgba(30,60,90,.06)}
+body.light-theme .students-page .stat-card p{color:#6e8095}
+body.light-theme .student-form label{color:#314d68}
+body.light-theme .student-form input,body.light-theme .student-search input,body.light-theme .student-toolbar select{background:#fff;color:#172b43;border-color:#d3e0ec}
+body.light-theme .student-form input::placeholder,body.light-theme .student-search input::placeholder{color:#91a0b0}
+body.light-theme .student-search{background:#fff;border-color:#d3e0ec;color:#1689e8}
+body.light-theme .student-email{color:#476984}
+body.light-theme .students-empty{color:#637b91}
+body.light-theme .students-empty b{color:#203b56}
+body.light-theme .student-security-note{color:#637b91}
+body.light-theme .student-action{background:#edf5fc;border-color:#cbddeb;color:#31516e}
+body.light-theme .student-action.pause{background:#fff0f1;border-color:#f0cbd0;color:#a43f50}
+body.light-theme .student-action.activate{background:#e2f7ef;border-color:#bde8d6;color:#167454}
+body.light-theme .student-action.delete{background:#f5eff7;border-color:#e2d2e8;color:#755181}
