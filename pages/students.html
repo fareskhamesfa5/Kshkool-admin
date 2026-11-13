@@ -1,1 +1,81 @@
-<!doctype html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>الطلاب | Koshkool</title><link rel="stylesheet" href="../css/admin.css"></head><body class="app-page"><aside class="sidebar"><a class="brand" href="../dashboard.html"><span class="brand-mark small">K</span><span><b>Koshkool</b><small>ADMIN PANEL</small></span></a><nav><a class="nav-link" href="../dashboard.html">▦ <span>نظرة عامة</span></a><a class="nav-link active" href="students.html">♙ <span>الطلاب</span></a><a class="nav-link" href="lessons.html">▤ <span>الدروس</span></a><a class="nav-link" href="exams.html">✎ <span>الامتحانات</span></a><a class="nav-link" href="results.html">▥ <span>النتائج</span></a><a class="nav-link" href="announcements.html">◈ <span>الإعلانات</span></a><a class="nav-link owner-only" href="admins.html">♧ <span>المشرفون</span></a></nav></aside><main class="main-content page-placeholder"><header class="topbar"><div><p class="eyebrow">MANAGEMENT</p><h1>إدارة الطلاب</h1></div></header><section class="panel"><h3>قائمة الطلاب</h3><p class="muted">سيتم عرض بيانات الطلاب بعد ربط الجدول بسياسات القراءة الآمنة.</p><div class="notice">لا تعدّل جدول profiles أو كلمات مرور الطلاب من لوحة الإدارة. استخدم صلاحيات Supabase الآمنة.</div></section></main></body></html>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#071426">
+  <title>إدارة الطلاب | Koshkool Admin</title>
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="../css/students.css">
+</head>
+<body class="app-page">
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="../dashboard.html"><span class="brand-mark small">K</span><span><b>Koshkool</b><small>ADMIN PANEL</small></span></a>
+    <nav>
+      <p class="nav-caption">القائمة الرئيسية</p>
+      <a class="nav-link" href="../dashboard.html">▦ <span>نظرة عامة</span></a>
+      <a class="nav-link active" href="students.html">♙ <span>الطلاب</span></a>
+      <a class="nav-link" href="lessons.html">▤ <span>الدروس</span></a>
+      <a class="nav-link" href="exams.html">✎ <span>الامتحانات</span></a>
+      <a class="nav-link" href="results.html">▥ <span>النتائج</span></a>
+      <a class="nav-link" href="announcements.html">◈ <span>الإعلانات</span></a>
+      <a class="nav-link owner-only" href="admins.html">♧ <span>المشرفون</span></a>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="profile-mini"><div class="avatar">A</div><div><b id="adminName">المشرف</b><small id="adminRole">ADMIN</small></div></div>
+      <button id="logoutBtn" class="btn ghost full" type="button">تسجيل الخروج ↗</button>
+    </div>
+  </aside>
+
+  <main class="main-content students-page">
+    <header class="topbar">
+      <button id="menuBtn" class="icon-btn" aria-label="القائمة">☰</button>
+      <div><p class="eyebrow">MANAGEMENT / STUDENTS</p><h1>إدارة الطلاب</h1></div>
+      <div class="top-actions"><span class="status-dot"></span><span class="muted">إدارة حسابات الطلاب</span></div>
+    </header>
+
+    <section class="welcome students-welcome">
+      <div><span class="tag">مركز إدارة الطلاب</span><h2>كل بيانات الطلاب في مكان واحد</h2><p class="muted">تابع الحسابات، أنشئ حسابات جديدة، وتحكم في حالة الوصول للمنصة.</p></div>
+      <div class="students-art" aria-hidden="true">ST.</div>
+    </section>
+
+    <section class="students-stats">
+      <article class="stat-card"><span class="stat-icon">♙</span><p>إجمالي الطلاب</p><strong id="totalStudents">—</strong><small>كل الحسابات المسجلة</small></article>
+      <article class="stat-card"><span class="stat-icon">✓</span><p>حسابات نشطة</p><strong id="activeStudents">—</strong><small>يمكنها الوصول للمنصة</small></article>
+      <article class="stat-card"><span class="stat-icon">Ⅱ</span><p>حسابات موقوفة</p><strong id="inactiveStudents">—</strong><small>تم إيقاف الوصول إليها</small></article>
+    </section>
+
+    <section class="panel student-create-panel">
+      <div class="student-section-head"><div><span class="section-kicker">حساب جديد</span><h3>إضافة طالب</h3><p class="muted">إنشاء حساب طالب منفصل عن حسابات المشرفين.</p></div><span class="student-plus">＋</span></div>
+      <form id="createStudentForm" class="student-form">
+        <label>اسم الطالب<input id="studentName" type="text" required minlength="2" maxlength="100" autocomplete="name" placeholder="الاسم بالكامل"></label>
+        <label>البريد الإلكتروني<input id="studentEmail" type="email" required autocomplete="email" placeholder="student@example.com"></label>
+        <label>كلمة المرور المؤقتة<input id="studentPassword" type="password" required minlength="8" autocomplete="new-password" placeholder="8 أحرف على الأقل"></label>
+        <div class="student-form-actions"><button id="createStudentBtn" class="btn primary" type="submit">＋ إنشاء حساب الطالب</button><span class="muted">سيتم إنشاء الحساب وتسجيله في قاعدة البيانات.</span></div>
+      </form>
+      <p id="formMessage" class="student-message" role="status"></p>
+    </section>
+
+    <section class="panel student-list-panel">
+      <div class="student-list-heading"><div><span class="section-kicker">قاعدة بيانات الطلاب</span><h3>قائمة الطلاب</h3><p class="muted">ابحث عن طالب أو غيّر حالة حسابه.</p></div><button id="refreshStudents" class="btn ghost" type="button">↻ تحديث</button></div>
+      <div class="student-toolbar">
+        <div class="student-search"><span>⌕</span><input id="studentSearch" type="search" placeholder="ابحث بالاسم أو البريد الإلكتروني..."></div>
+        <select id="studentFilter" aria-label="تصفية حسب حالة الحساب"><option value="all">كل الحسابات</option><option value="active">النشطة فقط</option><option value="inactive">الموقوفة فقط</option></select>
+      </div>
+      <p id="listMessage" class="student-message" role="status"></p>
+      <div class="table-wrap">
+        <table class="data-table students-table">
+          <thead><tr><th>الطالب</th><th>البريد الإلكتروني</th><th>تاريخ التسجيل</th><th>الحالة</th><th>إدارة الحساب</th></tr></thead>
+          <tbody id="studentsTableBody"><tr><td colspan="5">جارٍ تحميل الطلاب...</td></tr></tbody>
+        </table>
+      </div>
+      <div id="emptyStudents" class="students-empty" hidden><span>♙</span><b>لا توجد نتائج</b><small>جرّب تغيير كلمات البحث أو التصفية.</small></div>
+    </section>
+    <p class="student-security-note">تُنفّذ إدارة الحسابات من الخادم بعد التحقق من جلسة المشرف وصلاحياته. لا يتم عرض كلمات المرور أو تخزينها في لوحة الإدارة.</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../js/supabase.js"></script>
+  <script src="../js/students.js"></script>
+</body>
+</html>
