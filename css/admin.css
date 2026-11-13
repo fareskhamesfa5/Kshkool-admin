@@ -206,3 +206,192 @@ body.app-page{
  .admin-form-actions{align-items:stretch;flex-direction:column}
  .admin-list-head{align-items:flex-start;flex-direction:column}
 }
+
+
+/* Contemporary admin management refresh */
+.admins-page{
+  max-width:1600px;
+  padding-top:34px;
+}
+.admins-page .topbar{
+  margin-bottom:30px;
+}
+.admins-page .topbar h1{
+  font-size:clamp(24px,3vw,32px);
+  letter-spacing:-.5px;
+}
+.admins-page .eyebrow{
+  letter-spacing:1.7px;
+  font-size:10px;
+}
+.admins-page .admins-welcome{
+  min-height:190px;
+  padding:34px 38px;
+  border:1px solid rgba(104,190,255,.24);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 82% 28%,rgba(55,166,255,.22),transparent 28%),
+    linear-gradient(120deg,#123a60 0%,#0d2743 58%,#0a1c31 100%);
+  box-shadow:0 22px 55px rgba(0,0,0,.2);
+}
+.admins-page .admins-welcome h2{
+  margin:14px 0 6px;
+  font-size:clamp(24px,3vw,34px);
+  letter-spacing:-.6px;
+}
+.admins-page .admins-welcome p{font-size:13px;line-height:1.9}
+.admins-page .welcome-art{
+  font-size:clamp(66px,9vw,104px);
+  opacity:.55;
+  text-shadow:0 12px 34px rgba(0,0,0,.25);
+}
+.admins-page .tag{
+  padding:7px 13px;
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:.2px;
+}
+.admin-stats{
+  gap:16px;
+  margin:20px 0;
+}
+.admins-page .stat-card{
+  position:relative;
+  min-height:132px;
+  padding:21px 22px;
+  overflow:hidden;
+  border-radius:18px;
+  border:1px solid rgba(102,180,235,.16);
+  background:linear-gradient(145deg,rgba(17,46,75,.98),rgba(9,27,47,.98));
+  box-shadow:0 12px 32px rgba(0,0,0,.13);
+}
+.admins-page .stat-card:after{
+  content:"";
+  position:absolute;
+  width:105px;height:105px;
+  left:-30px;bottom:-52px;
+  border-radius:50%;
+  background:rgba(56,166,255,.08);
+}
+.admins-page .stat-icon{
+  width:42px;height:42px;
+  border-radius:13px;
+  font-size:19px;
+}
+.admins-page .stat-card p{margin:13px 0 2px;font-size:12px}
+.admins-page .stat-card strong{font-size:30px;line-height:1.35}
+.admins-page .admin-create-panel,
+.admins-page .admins-list-panel{
+  padding:25px;
+  border-radius:19px;
+  border:1px solid rgba(102,180,235,.17);
+  background:linear-gradient(155deg,rgba(15,39,64,.98),rgba(8,25,43,.98));
+  box-shadow:0 16px 42px rgba(0,0,0,.14);
+}
+.admins-page .panel-head h3{font-size:18px;letter-spacing:-.2px}
+.admins-page .panel-head p{font-size:12px;line-height:1.8;margin-top:5px}
+.admin-form{
+  gap:17px;
+  margin-top:23px;
+}
+.admin-form label{
+  gap:8px;
+  font-size:12px;
+  color:#d8eaff;
+}
+.admin-form input{
+  min-height:48px;
+  padding:12px 15px;
+  border-radius:11px;
+  border:1px solid #294e70;
+  background:rgba(4,18,33,.72);
+  transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.admin-form input:hover{border-color:#3978a8}
+.admin-form input:focus{
+  border-color:#4bb3ff;
+  background:#081d33;
+  box-shadow:0 0 0 4px rgba(56,166,255,.13);
+}
+.admin-form input::placeholder{color:#718ba5}
+.admin-form-actions{gap:13px;margin-top:8px}
+.admin-form-actions .muted{font-size:11px;line-height:1.8}
+.admins-page .btn{
+  min-height:43px;
+  border-radius:11px;
+  padding:10px 17px;
+  transition:transform .16s ease,filter .16s ease,background .16s ease;
+}
+.admins-page .btn:not(:disabled):hover{transform:translateY(-1px);filter:brightness(1.08)}
+.admins-page .btn.primary{
+  background:linear-gradient(115deg,#1689e8,#55baff);
+  box-shadow:0 7px 18px rgba(22,137,232,.2);
+}
+.admins-page .btn.ghost{
+  background:#102b47;
+  border:1px solid #2a5275;
+}
+.admins-page .admin-list-head{
+  align-items:center;
+  margin-bottom:12px;
+}
+.admins-page .table-wrap{
+  border:1px solid rgba(92,153,199,.15);
+  border-radius:13px;
+  background:rgba(4,17,31,.25);
+}
+.admins-page .admins-table{
+  margin:0;
+  border-collapse:separate;
+  border-spacing:0;
+}
+.admins-page .admins-table th{
+  padding:15px 16px;
+  background:rgba(19,54,86,.72);
+  color:#a9d6f8;
+  font-size:11px;
+  font-weight:800;
+}
+.admins-page .admins-table td{
+  padding:15px 16px;
+  font-size:12px;
+  border-bottom:1px solid rgba(77,126,164,.16);
+}
+.admins-page .admins-table tbody tr:last-child td{border-bottom:0}
+.admins-page .admins-table tbody tr{transition:background .15s ease}
+.admins-page .admins-table tbody tr:hover{background:rgba(41,119,177,.09)}
+.admins-page .role-pill,.admins-page .state-pill{
+  padding:6px 11px;
+  border-radius:999px;
+  font-size:10px;
+}
+.admins-page .admin-message{
+  font-size:12px;
+  line-height:1.8;
+}
+.admins-page .admin-security-note{
+  margin:18px 4px;
+  padding:12px 15px;
+  border:1px solid rgba(67,139,191,.16);
+  border-radius:12px;
+  background:rgba(11,35,58,.55);
+  color:#9dbbd5;
+  line-height:1.8;
+}
+@media(max-width:700px){
+  .admins-page{padding:20px 14px}
+  .admins-page .admins-welcome{min-height:155px;padding:22px;border-radius:17px}
+  .admins-page .admins-welcome h2{font-size:23px}
+  .admin-stats{gap:10px}
+  .admins-page .stat-card{min-height:116px;padding:15px;border-radius:15px}
+  .admins-page .stat-card strong{font-size:25px}
+  .admins-page .admin-create-panel,
+  .admins-page .admins-list-panel{padding:17px;border-radius:16px}
+  .admin-form{gap:13px}
+  .admin-form-actions .btn{width:100%}
+  .admins-page .admin-list-head{gap:10px}
+  .admins-page .admin-list-head .btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .admins-page *{transition:none!important}
+}
